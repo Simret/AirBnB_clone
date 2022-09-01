@@ -18,7 +18,8 @@ class BaseModel():
                     self.__dict__[k] = datetime.strptime(val, timeformat)
                 else:
                     self.__dict__[k] = val
-
+        else:
+            model.storage.new(self)
     def __str__(self):
         '''string formating function'''
         return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
@@ -26,6 +27,7 @@ class BaseModel():
 
     def save(self):
         self.updated_at = datetime.now()
+        models.storage.sav()
 
     def to_dict(self):
         new_dict = self.__dict__.copy()
