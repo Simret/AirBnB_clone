@@ -3,7 +3,7 @@
 '''
 
 import json
-from model.base_model import BaseModel
+from models.base_model import BaseModel
 
 class FileStorage():
 
@@ -30,11 +30,11 @@ class FileStorage():
             no exception should be raised)
     """
     __file_path = "file.json"
-    __objects == dict()
+    __objects = dict()
 
     def all(self):
         """ returns the dictionary __objects """
-        return FileStorage._objects
+        return FileStorage.__objects
     
     def new(self, obj):
 
@@ -48,7 +48,8 @@ class FileStorage():
         """ serializes __objects to the JSON file(path:__file_path)"""
 
         ob_dict = FileStorage.__objects
-        object_dict = {obj: object_dict[obj].to_dict() for obj in object_dict.keys()}
+        object_dict = {obj: ob_dict[obj].to_dict() 
+        for obj in ob_dict.keys()}
         with open(FileStorage.__file_path, 'w') as f:
             json.dump(object_dict, f)
 
@@ -58,8 +59,8 @@ class FileStorage():
             with open(FileStorage.__file_path) as f:
                 obj_dict = json.load(f)
                 for obj in obj_dict.values():
-                    cls_name = obj["__class__"]
+                    class_name = obj["__class__"]
                     del obj["__class__"]
-                    self.new(eval(cls_name)(**obj))
+                    self.new(eval(class_name)(**obj))
         except FileNotFoundError:
             return
