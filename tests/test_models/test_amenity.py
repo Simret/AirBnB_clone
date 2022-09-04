@@ -93,6 +93,7 @@ class TestAmenity_save(unittest.TestCase):
             os.rename("file.json", "tmp")
         except IOError:
             pass
+
     def tearDown(self):
 
         try:

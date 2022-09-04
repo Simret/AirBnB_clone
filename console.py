@@ -68,9 +68,8 @@ class HBNBCommand(cmd.Cmd):
         """EOF signal to exit the program."""
         print("")
         exit()
-    
+
     def do_create(self, arg):
-    
         """Usage: Create a new class instance and print its id."""
 
         if len(arg) == 0:

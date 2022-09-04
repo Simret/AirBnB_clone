@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-''' This Modules is designed to define all attributes, intasces and functions for all other classes'''
+''' This Modules is designed to define all attributes,
+intasces and functions for all other classes'''
 
 import uuid
 from datetime import datetime
@@ -22,10 +23,11 @@ class BaseModel():
                     self.__dict__[k] = val
         else:
             models.storage.new(self)
+
     def __str__(self):
         '''string formating function'''
-        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
-    
+        return ("[{}] ({}) {}".format(self.__class__.__name__,
+                self.id, self.__dict__))
 
     def save(self):
         self.updated_at = datetime.now()
