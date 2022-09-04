@@ -34,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
 
         def do_create(self, arg):
             """Usage: Create a new class instance and print its id."""
-    
+
         if len(arg) == 0:
             print("** class name missing **")
         elif arg[0] not in HBNBCommand.__classes:
@@ -105,6 +105,7 @@ class HBNBCommand(cmd.Cmd):
                 elif len(argl) == 0:
                     objl.append(obj.__str__())
             print(objl)
+
     def do_update(self, arg):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
        <class>.update(<id>, <attribute_name>, <attribute_value>) or
@@ -154,6 +155,15 @@ class HBNBCommand(cmd.Cmd):
                     obj.__dict__[k] = v
         models.storage.save()
 
+    def do_count(self, arg):
+        """Usage: count <class> or <class>.count()
+        Retrieve the number of instances of a given class."""
+        argl = parse(arg)
+        count = 0
+        for obj in models.storage.all().values():
+            if argl[0] == obj.__class__.__name__:
+                count += 1
+        print(count)
 
 def parse(arg):
     """Convert argument passed on terminal to a list/dict"""
@@ -172,9 +182,6 @@ def parse(arg):
         argl = [i.strip(",") for i in ls]
         argl.append(braces.group())
         return argl
-
-
-
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
