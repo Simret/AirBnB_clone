@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 ''' converting the dictionary representations to a JSON strings
 '''
 
@@ -10,6 +11,8 @@ from models.city import City
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
+
+
 class FileStorage():
 
     """ this class
@@ -40,21 +43,20 @@ class FileStorage():
     def all(self):
         """ returns the dictionary __objects """
         return FileStorage.__objects
-    
+
     def new(self, obj):
 
         """ sets in __objects the object with key <obj cls name>.id"""
 
         class_name = type(obj).__name__
         FileStorage.__objects["{}.{}".format(class_name, obj.id)] = obj
-    
+
     def save(self):
 
         """ serializes __objects to the JSON file(path:__file_path)"""
 
         ob_dict = FileStorage.__objects
-        object_dict = {obj: ob_dict[obj].to_dict() 
-        for obj in ob_dict.keys()}
+        object_dict = {obj: ob_dict[obj].to_dict() for obj in ob_dict.keys()}
         with open(FileStorage.__file_path, 'w') as f:
             json.dump(object_dict, f)
 
