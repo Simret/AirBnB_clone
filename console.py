@@ -42,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print(eval(arg[0])().id)
             models.storage.save()
-    
+
     def do_create(self, arg):
         """Usage: create <class>
         Create a new class instance and print its id.
@@ -182,6 +182,7 @@ def parse(arg):
         argl = [i.strip(",") for i in ls]
         argl.append(braces.group())
         return argl
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
