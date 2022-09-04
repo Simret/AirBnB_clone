@@ -32,13 +32,46 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program."""
         exit()
 
+    def emptyline(self):
+        """overides the default behavir of the emptyline method
+            of repeating the last nonempty command entered
+            it does nothing upon receiving an empty line.
+        """
+        pass
+
+    def default(self, arg):
+        """Overides the default behaviour of prinint and error
+            message when called on an input line when the command is
+            not recognized
+            Default behavior for cmd module when input is invalid
+        """
+        argdict = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "count": self.do_count,
+            "update": self.do_update
+        }
+        match = re.search(r"\.", arg)
+        if match is not None:
+            argl = [arg[:match.span()[0]], arg[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", argl[1])
+            if match is not None:
+                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in argdict.keys():
+                    call = "{} {}".format(argl[0], command[1])
+                    return argdict[command[0]](call)
+        print("*** Unknown syntax: {}".format(arg))
+        return False
+
     def do_EOF(self, arg):
         """EOF signal to exit the program."""
         print("")
         exit()
-
-        def do_create(self, arg):
-            """Usage: Create a new class instance and print its id."""
+    
+    def do_create(self, arg):
+    
+        """Usage: Create a new class instance and print its id."""
 
         if len(arg) == 0:
             print("** class name missing **")
