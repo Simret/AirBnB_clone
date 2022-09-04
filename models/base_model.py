@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+
 ''' This Modules is designed to define all attributes, intasces and functions for all other classes'''
+
 import uuid
 from datetime import datetime
 import models
