@@ -165,8 +165,11 @@ class HBNBCommand(cmd.Cmd):
                 count += 1
         print(count)
 
+
 def parse(arg):
+
     """Convert argument passed on terminal to a list/dict"""
+
     braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
     if braces is None:
